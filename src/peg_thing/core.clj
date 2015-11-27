@@ -101,6 +101,14 @@
   [board p1 p2]
   (place-peg (remove-peg board p1) p2))
 
+(defn valid-moves
+  "Returns a map of valid moves given a board and starting position"
+  [board pos]
+  (into {}
+        (filter (fn [[destination jumped]]
+                  (and (not (pegged? board destination))
+                       (pegged? board jumped)))
+                (get-in board [pos :connections]))))
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
