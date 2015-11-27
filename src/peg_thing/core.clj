@@ -58,7 +58,10 @@
 (defn connect-down-right
   "Creates connections between a given position and a position down and right"
   [board max-pos pos]
-  nil)
+  (let [row (row-num pos)
+        neighbor (+ 1 row pos)
+        destination (+ 2 row neighbor)]
+    (connect board max-pos pos neighbor destination)))
 
 (defn -main
   "I don't do a whole lot ... yet."
