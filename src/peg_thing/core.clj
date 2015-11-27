@@ -18,6 +18,11 @@
   [n]
   (= n (last (take-while #(<= % n) tri))))
 
+(defn row-tri
+  "Returns the triangular number at the end of the given row number"
+  [row]
+  (last (take row tri)))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]

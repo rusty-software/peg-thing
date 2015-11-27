@@ -9,3 +9,8 @@
 (deftest triangular?-tests
   (is (triangular? 10))
   (is (not (triangular? 16))))
+
+(deftest row-tri-tests
+  (testing "Given a row number, returns the triangular number at the end of the row"
+    (is (= 6 (row-tri 3)))
+    (is (= 10 (row-tri 4)))))
