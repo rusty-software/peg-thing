@@ -23,8 +23,18 @@
 
 (deftest connect-tests?
   (testing "Given a set of valid inputs, connects the pos with the neighbor and jump destination"
-    (= {1 {:connections {4 2}}
-        4 {:connections {1 2}}}
-       (connect {} 15 1 2 4)))
+    (is (= {1 {:connections {4 2}}
+            4 {:connections {1 2}}}
+           (connect {} 15 1 2 4))))
   (testing "Given a set of invalid inputs, things"
-    (= nil (connect {} 15 7 16 22))))
+    (is (= {} (connect {} 15 7 16 22)))))
+
+(deftest connect-right-tests
+  (testing "Given available connection to right, connects"
+    (is (= {4 {:connections {6 5}}
+            6 {:connections {4 5}}} (connect-right {} 15 4)))
+    (is (= {8 {:connections {10 9}}
+            10 {:connections {8 9}}} (connect-right {} 15 8))))
+  (testing "Given a pos with no available destination, does not connect"
+    (is (= {} (connect-right {} 15 9)))
+    (is (= {} (connect-right {} 15 10)))))
