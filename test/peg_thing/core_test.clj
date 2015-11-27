@@ -167,5 +167,26 @@
       (let [new-board (-> board
                           (update-in [4 :pegged] (constantly true))
                           (update-in [6 :pegged] (constantly true)))]
-        (is (nil? (can-move? new-board)))))))
+        (is (nil? (can-move? new-board))))))
+
+  (deftest render-pos-tests
+    (testing "Renders lettered position with 0 for pegged and - for unpegged"
+      (is (= "c0" (render-pos board 3)))
+      (is (= "d-" (render-pos board 4)))))
+
+  (deftest row-positions-tests
+    (testing "Given a row num, returns a seq of the positions in the row"
+      (is (= [1] (row-positions 1)))
+      (is (= [2 3] (row-positions 2)))
+      (is (= [4 5 6] (row-positions 3)))
+      (is (= [7 8 9 10] (row-positions 4)))
+      (is (= [11 12 13 14 15] (row-positions 5)))))
+
+  (deftest row-padding-tests
+    (testing "Given a row number and total row count, returns a string with spaces appropriate to center the row"
+      (is (= "" (row-padding 5 5)))
+      (is (= "  " (row-padding 4 5)))
+      (is (= "   " (row-padding 3 5)))
+      (is (= "     " (row-padding 2 5)))
+      (is (= "      " (row-padding 1 5))))))
 

@@ -128,6 +128,31 @@
   (some (comp not-empty (partial valid-moves board))
         (map first (filter #(get (second %) :pegged) board))))
 
+(def alpha-start 97)
+(def alpha-end 123)
+(def letters (map (comp str char) (range alpha-start alpha-end)))
+(def pos-chars 3)
+
+(defn render-pos
+  "Render a specific pos as either pegged or unpegged"
+  [board pos]
+  (str (nth letters (dec pos))
+       (if (get-in board [pos :pegged])
+         "0"
+         "-")))
+
+(defn row-positions
+  "Return all positions for a given row"
+  [row-num]
+  (range (inc (or (row-tri (dec row-num)) 0))
+         (inc (row-tri row-num))))
+
+(defn row-padding
+  "String of spaces to prepend to a row to center it"
+  [row-num rows]
+  (let [pad-length (/ (* (- rows row-num) pos-chars) 2)]
+    (apply str (repeat pad-length " "))))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
