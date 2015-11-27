@@ -109,6 +109,12 @@
                   (and (not (pegged? board destination))
                        (pegged? board jumped)))
                 (get-in board [pos :connections]))))
+
+(defn valid-move?
+  "Returns the jumped position for a valid move, nil otherwise"
+  [board p1 p2]
+  (get (valid-moves board p1) p2))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]

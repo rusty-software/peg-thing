@@ -136,4 +136,10 @@
     (is (= {4 5} (valid-moves board 6)))
     (is (= {4 7} (valid-moves board 11)))
     (is (= {} (valid-moves board 5)))
-    (is (= {} (valid-moves board 8)))))
+    (is (= {} (valid-moves board 8))))
+
+  (deftest valid-move?-tests
+    (is (= 2 (valid-move? board 1 4)))
+    (is (= 5 (valid-move? board 6 4)))
+    (is (= 7 (valid-move? board 11 4)))))
+
