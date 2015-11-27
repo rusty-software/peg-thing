@@ -160,6 +160,12 @@
   (str (row-padding row-num (:rows board))
        (str/join " " (map (partial render-pos board) (row-positions row-num)))))
 
+(defn print-board
+  "Prints the board to stdout"
+  [board]
+  (doseq [row-num (range 1 (inc (:rows board)))]
+    (println (render-row board row-num))))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
