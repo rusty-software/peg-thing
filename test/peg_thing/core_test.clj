@@ -188,5 +188,13 @@
       (is (= "  " (row-padding 4 5)))
       (is (= "   " (row-padding 3 5)))
       (is (= "     " (row-padding 2 5)))
-      (is (= "      " (row-padding 1 5))))))
+      (is (= "      " (row-padding 1 5)))))
+
+  (deftest render-row-tests
+    (testing "Given a board and row num, generates the string representation of the row"
+      (is (= "      a0" (render-row board 1)))
+      (is (= "     b0 c0" (render-row board 2)))
+      (is (= "   d- e0 f-" (render-row board 3)))
+      (is (= "  g0 h0 i0 j0" (render-row board 4)))
+      (is (= "k0 l0 m0 n0 o0" (render-row board 5))))))
 

@@ -1,5 +1,6 @@
 (ns peg-thing.core
-  (:require [clojure.set :as set])
+  (:require [clojure.set :as set]
+            [clojure.string :as str])
   (:gen-class))
 
 (declare successful-move prompt-move game-over query-rows)
@@ -152,6 +153,12 @@
   [row-num rows]
   (let [pad-length (/ (* (- rows row-num) pos-chars) 2)]
     (apply str (repeat pad-length " "))))
+
+(defn render-row
+  "Generates the string representation for a single row given a board"
+  [board row-num]
+  (str (row-padding row-num (:rows board))
+       (str/join " " (map (partial render-pos board) (row-positions row-num)))))
 
 (defn -main
   "I don't do a whole lot ... yet."
