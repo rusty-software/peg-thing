@@ -38,3 +38,14 @@
   (testing "Given a pos with no available destination, does not connect"
     (is (= {} (connect-right {} 15 9)))
     (is (= {} (connect-right {} 15 10)))))
+
+(deftest connect-down-left-tests
+  (testing "Given available connection down and left, connects"
+    (is (= {3 {:connections {8 5}}
+            8 {:connections {3 5}}}
+           (connect-down-left {} 15 3)))
+    (is (= {6 {:connections {13 9}}
+            13 {:connections {6 9}}}
+           (connect-down-left {} 15 6))))
+  (testing "Given a pos with no available destination, does not connect"
+    (is (= {} (connect-down-left {} 15 9)))))

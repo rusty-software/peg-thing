@@ -26,7 +26,7 @@
 (defn row-num
   "Returns the row number in which the given position appears"
   [pos]
-  (inc (count (take-while #(<= % pos) tri))))
+  (inc (count (take-while #(> pos %) tri))))
 
 (defn connect
   "Form a mutual connection between two positions"
@@ -39,12 +39,26 @@
     board))
 
 (defn connect-right
+  "Creates connections between a given position and a position to the right"
   [board max-pos pos]
   (let [neighbor (inc pos)
         destination (inc neighbor)]
     (if-not (or (triangular? neighbor) (triangular? pos))
       (connect board max-pos pos neighbor destination)
       board)))
+
+(defn connect-down-left
+  "Creates connections between a given position and a position down and left"
+  [board max-pos pos]
+  (let [row (row-num pos)
+        neighbor (+ row pos)
+        destination (+ 1 row neighbor)]
+    (connect board max-pos pos neighbor destination)))
+
+(defn connect-down-right
+  "Creates connections between a given position and a position down and right"
+  [board max-pos pos]
+  nil)
 
 (defn -main
   "I don't do a whole lot ... yet."
