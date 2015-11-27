@@ -95,4 +95,14 @@
 
   (deftest pegged?-tests
     (is (pegged? board 3))
-    (is (not (pegged? board 4)))))
+    (is (not (pegged? board 4))))
+
+  (deftest remove-peg-tests
+    (is (get-in board [3 :pegged]))
+    (let [unpegged-board (remove-peg board 3)]
+      (is (not (get-in unpegged-board [3 :pegged])))))
+
+  (deftest place-peg-tests
+    (is (not (get-in board [4 :pegged])))
+    (let [pegged-board (place-peg board 4)]
+      (is (get-in pegged-board [4 :pegged])))))

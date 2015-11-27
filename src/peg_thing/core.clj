@@ -86,6 +86,16 @@
   [board pos]
   (get-in board [pos :pegged]))
 
+(defn remove-peg
+  "Removes the peg from the given position"
+  [board pos]
+  (assoc-in board [pos :pegged] false))
+
+(defn place-peg
+  "Places a peg in the given position"
+  [board pos]
+  (assoc-in board [pos :pegged] true))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
