@@ -81,6 +81,11 @@
             initial-board
             (range 1 (inc max-pos)))))
 
+(defn pegged?
+  "Does the position have a peg in it?"
+  [board pos]
+  (get-in board [pos :pegged]))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
