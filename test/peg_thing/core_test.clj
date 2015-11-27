@@ -60,3 +60,9 @@
            (connect-down-right {} 15 6))))
   (testing "Given a pos with no available destination, does not connect"
     (is (= {} (connect-down-right {} 15 8)))))
+
+(deftest add-pos-tests
+  (is (= {1 {:connections {6 3 4 2} :pegged true}
+          4 {:connections {1 2}}
+          6 {:connections {1 3}}}
+         (add-pos {} 15 1))))
