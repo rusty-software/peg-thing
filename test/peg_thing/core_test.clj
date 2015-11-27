@@ -66,3 +66,17 @@
           4 {:connections {1 2}}
           6 {:connections {1 3}}}
          (add-pos {} 15 1))))
+
+(deftest new-board-tests
+  (is (= {:rows 4
+          1 {:connections {4 2 6 3} :pegged true}
+          2 {:connections {7 4 9 5} :pegged true}
+          3 {:connections {8 5 10 6} :pegged true}
+          4 {:connections {1 2 6 5} :pegged true}
+          5 {:pegged true}
+          6 {:connections {1 3 4 5} :pegged true}
+          7 {:connections {2 4 9 8} :pegged true}
+          8 {:connections {3 5 10 9} :pegged true}
+          9 {:connections {2 5 7 8} :pegged true}
+          10 {:connections {3 6 8 9} :pegged true}}
+         (new-board 4))))
