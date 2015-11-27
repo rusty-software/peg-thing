@@ -105,4 +105,11 @@
   (deftest place-peg-tests
     (is (not (get-in board [4 :pegged])))
     (let [pegged-board (place-peg board 4)]
-      (is (get-in pegged-board [4 :pegged])))))
+      (is (get-in pegged-board [4 :pegged]))))
+
+  (deftest move-peg-tests
+    (is (get-in board [1 :pegged]))
+    (is (not (get-in board [4 :pegged])))
+    (let [moved-board (move-peg board 1 4)]
+      (is (not (get-in moved-board [1 :pegged])))
+      (is (get-in moved-board [4 :pegged])))))

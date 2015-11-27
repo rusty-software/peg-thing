@@ -96,6 +96,11 @@
   [board pos]
   (assoc-in board [pos :pegged] true))
 
+(defn move-peg
+  "Removes a peg from the first position and places it in the second position"
+  [board p1 p2]
+  (place-peg (remove-peg board p1) p2))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
