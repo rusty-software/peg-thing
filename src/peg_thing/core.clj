@@ -28,6 +28,16 @@
   [pos]
   (inc (count (take-while #(<= % pos) tri))))
 
+(defn connect
+  "Form a mutual connection between two positions"
+  [board max-pos pos neighbor destination]
+  (if (<= destination max-pos)
+    (reduce (fn [new-board [p1 p2]]
+              (assoc-in new-board [p1 :connections p2] neighbor))
+            board
+            [[pos destination] [destination pos]])
+    board))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]

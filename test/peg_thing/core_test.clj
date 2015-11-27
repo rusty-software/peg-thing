@@ -20,3 +20,11 @@
     (is (= 2 (row-num 2)))
     (is (= 3 (row-num 5)))
     (is (= 4 (row-num 9)))))
+
+(deftest connect-tests?
+  (testing "Given a set of valid inputs, connects the pos with the neighbor and jump destination"
+    (= {1 {:connections {4 2}}
+        4 {:connections {1 2}}}
+       (connect {} 15 1 2 4)))
+  (testing "Given a set of invalid inputs, things"
+    (= nil (connect {} 15 7 16 22))))
