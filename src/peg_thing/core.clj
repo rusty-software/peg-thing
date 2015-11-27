@@ -23,6 +23,11 @@
   [row]
   (last (take row tri)))
 
+(defn row-num
+  "Returns the row number in which the given position appears"
+  [pos]
+  (inc (count (take-while #(<= % pos) tri))))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]

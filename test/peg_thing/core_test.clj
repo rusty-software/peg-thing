@@ -14,3 +14,9 @@
   (testing "Given a row number, returns the triangular number at the end of the row"
     (is (= 6 (row-tri 3)))
     (is (= 10 (row-tri 4)))))
+
+(deftest row-num-tests
+  (testing "Given a position, returns the row number in which that position appears"
+    (is (= 2 (row-num 2)))
+    (is (= 3 (row-num 5)))
+    (is (= 4 (row-num 9)))))
