@@ -159,5 +159,13 @@
                           (update-in [2 :pegged] (constantly false))
                           (update-in [4 :pegged] (constantly true)))]
         (is (= new-board (make-move board 1 4))))
-      (is (= board (make-move board 12 5))))))
+      (is (= board (make-move board 12 5)))))
+
+  (deftest can-move?-tests
+    (testing "Given a board with valid moves, returns the first map of valid moves; otherwise, nil"
+      (is (= {4 2 6 3} (can-move? board)))
+      (let [new-board (-> board
+                          (update-in [4 :pegged] (constantly true))
+                          (update-in [6 :pegged] (constantly true)))]
+        (is (nil? (can-move? new-board)))))))
 

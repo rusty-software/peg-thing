@@ -122,6 +122,12 @@
     (move-peg (remove-peg board jumped) p1 p2)
     board))
 
+(defn can-move?
+  "Given a board with valid moves, returns the first map of valid moves; otherwise, nil"
+  [board]
+  (some (comp not-empty (partial valid-moves board))
+        (map first (filter #(get (second %) :pegged) board))))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
