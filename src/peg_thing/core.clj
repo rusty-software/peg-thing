@@ -115,6 +115,13 @@
   [board p1 p2]
   (get (valid-moves board p1) p2))
 
+(defn make-move
+  "Given a board and two positions, returns new board with position 1 and jumped position unpegged, position 2 pegged; otherwise, board"
+  [board p1 p2]
+  (if-let [jumped (valid-move? board p1 p2)]
+    (move-peg (remove-peg board jumped) p1 p2)
+    board))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
