@@ -227,8 +227,14 @@
 (defn game-over
   "Announces game is over and prompts for another game"
   [board]
-  (let [remaining-pegs (count (filter #(:pegged %) (vals board)))]
-    (println "Game over!  You had" remaining-pegs "pegs left:")
+  (let [remaining-pegs (count (filter #(:pegged %) (vals board)))
+        score-msg (case remaining-pegs
+                    1 "You're a Genius!"
+                    2 "You're pretty smart!"
+                    3 "Not bad, but anybody can leave 3..."
+                    "Wow, you should really practice more!")]
+    (println "Game over!  You had" remaining-pegs "pegs left.")
+    (println score-msg)
     (print-board board)
     (println "Play again? y/n [y]")
     (let [input (get-input "y")]
