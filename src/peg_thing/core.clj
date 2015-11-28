@@ -1,6 +1,5 @@
 (ns peg-thing.core
-  (:require [clojure.set :as set]
-            [clojure.string :as str])
+  (:require [clojure.string :as str])
   (:gen-class))
 
 (defn tri*
