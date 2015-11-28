@@ -198,3 +198,8 @@
       (is (= "  g0 h0 i0 j0" (render-row board 4)))
       (is (= "k0 l0 m0 n0 o0" (render-row board 5))))))
 
+(deftest letter->pos-tests
+  (testing "Converts a letter string to a position number"
+    (is (= 1 (letter->pos "a")))
+    (is (= 7 (letter->pos "g")))
+    (is (= 15 (letter->pos "o")))))
