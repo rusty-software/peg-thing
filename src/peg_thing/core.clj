@@ -180,6 +180,11 @@
         default
         (str/lower-case input)))))
 
+(defn characters-as-strings
+  "Converts a string of characters to a seq of string characters"
+  [letters]
+  (map str (str/replace letters " " "")))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]

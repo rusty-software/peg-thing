@@ -211,3 +211,7 @@
   (testing "Uses default if input value is empty"
     (with-redefs [read-line (constantly "")]
       (is (= "a" (get-input "a"))))))
+
+(deftest characters-as-strings-tests
+  (is (= ["a" "b"] (characters-as-strings "a  b")))
+  (is (= ["a" "c" "b"] (characters-as-strings "a  cb"))))
