@@ -171,6 +171,15 @@
   [letter]
   (inc (- (int (first letter)) alpha-start)))
 
+(defn get-input
+  "Waits for user to enter text and hit enter, then cleans the input"
+  ([] (get-input nil))
+  ([default]
+    (let [input (str/trim (read-line))]
+      (if (empty? input)
+        default
+        (str/lower-case input)))))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]

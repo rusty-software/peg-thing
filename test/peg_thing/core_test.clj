@@ -203,3 +203,11 @@
     (is (= 1 (letter->pos "a")))
     (is (= 7 (letter->pos "g")))
     (is (= 15 (letter->pos "o")))))
+
+(deftest get-input-tests
+  (testing "Cleans input"
+    (with-redefs [read-line (constantly "  A  ")]
+      (is (= "a" (get-input)))))
+  (testing "Uses default if input value is empty"
+    (with-redefs [read-line (constantly "")]
+      (is (= "a" (get-input "a"))))))
