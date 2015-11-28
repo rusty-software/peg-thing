@@ -158,8 +158,9 @@
                           (update-in [1 :pegged] (constantly false))
                           (update-in [2 :pegged] (constantly false))
                           (update-in [4 :pegged] (constantly true)))]
-        (is (= new-board (make-move board 1 4))))
-      (is (= board (make-move board 12 5)))))
+        (is (= new-board (make-move board 1 4)))))
+    (testing "Invalid moves return nil"
+      (is (nil? (make-move board 12 5)))))
 
   (deftest can-move?-tests
     (testing "Given a board with valid moves, returns the first map of valid moves; otherwise, nil"

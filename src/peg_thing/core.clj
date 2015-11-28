@@ -3,8 +3,6 @@
             [clojure.string :as str])
   (:gen-class))
 
-(declare successful-move prompt-move game-over query-rows)
-
 (defn tri*
   "Generate lazy seq of triangular numbers"
   ([] (tri* 0 1))
@@ -120,8 +118,7 @@
   "Given a board and two positions, returns new board with position 1 and jumped position unpegged, position 2 pegged; otherwise, board"
   [board p1 p2]
   (if-let [jumped (valid-move? board p1 p2)]
-    (move-peg (remove-peg board jumped) p1 p2)
-    board))
+    (move-peg (remove-peg board jumped) p1 p2)))
 
 (defn can-move?
   "Given a board with valid moves, returns the first map of valid moves; otherwise, nil"
@@ -185,7 +182,62 @@
   [letters]
   (map str (str/replace letters " " "")))
 
+(declare prompt-move game-over)
+
+(defn prompt-empty-peg
+  "Removes a peg from the board and prompts for the next move"
+  [board]
+  (println "Here's your board:")
+  (print-board board)
+  (println "Remove which peg? [e]")
+  (prompt-move (remove-peg board (letter->pos (get-input "e")))))
+
+(defn prompt-rows
+  "Initializes a game by prompting for the board row count and then prompting for moves"
+  []
+  (println "How many rows? [5]")
+  (let [rows (Integer. (get-input 5))
+        board (new-board rows)]
+    (prompt-empty-peg board)))
+
+(defn user-entered-invalid-move
+  "Handles next step after user enters invalid move"
+  [board]
+  (println "\n!!!  That was an invalid move :-(\n")
+  (prompt-move board))
+
+(defn user-entered-valid-move
+  "Handles next step after user enters a valid move"
+  [board]
+  (if (can-move? board)
+    (prompt-move board)
+    (game-over board)))
+
+(defn prompt-move
+  "Read the player's move and act on it"
+  [board]
+  (println "\nHere's your board:")
+  (print-board board)
+  (println "Move from where to where?  Enter two letters:")
+  (let [input (map letter->pos (characters-as-strings (get-input)))]
+    (if-let [new-board (make-move board (first input) (second input))]
+      (user-entered-valid-move new-board)
+      (user-entered-invalid-move board))))
+
+(defn game-over
+  "Announces game is over and prompts for another game"
+  [board]
+  (let [remaining-pegs (count (filter #(:pegged %) (vals board)))]
+    (println "Game over!  You had" remaining-pegs "pegs left:")
+    (print-board board)
+    (println "Play again? y/n [y]")
+    (let [input (get-input "y")]
+      (if (= "y" input)
+        (prompt-rows)
+        (do
+          (println "Bye!")
+          (System/exit 0))))))
+
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (prompt-rows))
